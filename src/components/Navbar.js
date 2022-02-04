@@ -45,7 +45,7 @@ export default function Navbar(props) {
 
         <div style={{ display: "flex", alignItems: "center" }}>
           <div id="account" style={{ padding: "10px" }}>
-            {"0x0"}
+            {props.account}
           </div>
 
           {props.account ? (
