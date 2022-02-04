@@ -1,35 +1,26 @@
-import React, { Component } from 'react';
-import Web3 from 'web3';
-import Identicon from 'identicon.js';
-import './App.css';
-import Datreon from '../abis/Datreon.json'
-import Navbar from './Navbar'
-import Main from './Main'
+import React, { useState } from "react";
+import Web3 from "web3";
+import Identicon from "identicon.js";
+import "./App.css";
+import Datreon from "../abis/Datreon.json";
+import Navbar from "./Navbar";
+import Navbar2 from "./Navbar";
+import Main from "./Main";
 
+export default function App() {
+  const [account, setAccount] = useState("fgfgfgfgfgffhfr");
+  const [loading, setLoading] = useState(false);
 
-class App extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      account: '',
-    }
-  }
-
-  render() {
-    return (
-      <div>
-        <Navbar account={this.state.account} />
-        { this.state.loading
-          ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
-          : <Main
-            // Code...
-            />
-          }
-        }
-      </div>
-    );
-  }
+  return (
+    <div style={{ display: "flex" }}>
+      <Navbar account={account} />
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <Main
+        // Code...
+        />
+      )}
+    </div>
+  );
 }
-
-export default App;
