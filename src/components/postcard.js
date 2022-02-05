@@ -60,8 +60,8 @@ export default function MediaCard(props) {
           name={props.image.id}
           onClick={(event) => {
             let tipAmount = window.web3.utils.toWei("0.1", "Ether");
-            console.log(event.target.name, tipAmount);
-            props.tipImageOwner(event.target.name, tipAmount);
+            console.log(props.image.id, tipAmount);
+            props.tipImageOwner(props.image.id, tipAmount);
           }}
         >
           TIP 0.1 ETH

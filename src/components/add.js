@@ -95,7 +95,7 @@ export default function Add(props) {
                 style={{ width: "100%" }}
                 value={description}
                 onChange={(event) => {
-                  console.log(event.target.value);
+                  // console.log(event.target.value);
                   setDescription(event.target.value);
                 }}
                 required

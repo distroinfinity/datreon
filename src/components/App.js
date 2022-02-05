@@ -18,8 +18,10 @@ export default function App() {
   const [account, setAccount] = useState("fgfgfgfgfgffhfr");
   const [datreon, setDatreon] = useState();
   const [images, setImages] = useState([]);
+  const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [imageCount, setImageCount] = useState(0);
+  const [artistCount, setArtistCount] = useState(0);
   const [buffer, setBuffer] = useState();
 
   useEffect(() => {
@@ -67,15 +69,23 @@ export default function App() {
 
       // Load images
       const temp = [];
+      const temp2 = [];
       for (var i = 1; i <= imagesCount; i++) {
         const image = await datreon.methods.images(i).call();
         // console.log(i, image);
         temp.push(image);
+        if (!temp2.includes(image.author)) {
+          temp2.push(image.author);
+        }
       }
       // Sort images. Show highest tipped images first
       temp.sort((a, b) => b.tipAmount - a.tipAmount);
-
       setImages(temp);
+
+      console.log("Artist array", temp2);
+      setArtists(temp2);
+      setArtistCount(temp2.length);
+
       setLoading(false);
     } else {
       //Alert
@@ -135,6 +145,7 @@ export default function App() {
           captureFile={captureFile}
           uploadImage={uploadImage}
           images={images}
+          artists={artists}
           tipImageOwner={tipImageOwner}
         />
       )}
