@@ -24,8 +24,8 @@ function Alert(props) {
 const useStyles = makeStyles((theme) => ({
   fab: {
     position: "fixed",
-    bottom: 20,
-    right: 20,
+    top: 100,
+    left: 30,
   },
   container: {
     width: 500,
@@ -66,9 +66,11 @@ export default function Add(props) {
   };
   const [description, setDescription] = useState("");
 
+  const [title, setTitle] = useState("");
+
   return (
     <>
-      <Tooltip title="Add" aria-label="add" onClick={() => setOpen(true)}>
+      <Tooltip title="Add Post" aria-label="add" onClick={() => setOpen(true)}>
         <Fab color="primary" className={classes.fab}>
           <AddIcon />
         </Fab>
@@ -84,10 +86,23 @@ export default function Add(props) {
           >
             <div className={classes.item}>
               <TextField
+                id="standard-basic"
+                label="Title"
+                size="small"
+                style={{ width: "100%" }}
+                value={title}
+                onChange={(event) => {
+                  // console.log(event.target.value);
+                  setTitle(event.target.value);
+                }}
+                required
+              />
+            </div>
+            <div className={classes.item}>
+              <TextField
                 id="outlined-multiline-static"
                 multiline
                 rows={4}
-                // defaultValue="Tell your story..."
                 placeholder="Tell your story..."
                 variant="outlined"
                 label="Caption"
@@ -110,14 +125,7 @@ export default function Add(props) {
                 required
               />
             </div>
-            {/* <div className={classes.item}>
-              <TextField
-                id="standard-basic"
-                label="Title"
-                size="small"
-                style={{ width: "100%" }}
-              />
-            </div> */}
+
             {/* <div className={classes.item}> */}
             {/* <TextField select label="Visibility" value="Public">
                 <MenuItem value="Public">Public</MenuItem>
@@ -132,7 +140,7 @@ export default function Add(props) {
                 style={{ marginRight: 20 }}
                 onClick={() => {
                   console.log("uploading");
-                  props.uploadImage(description);
+                  props.uploadImage(title, description);
                   setOpenAlert(true);
                   setOpen(false);
                 }}
@@ -157,7 +165,7 @@ export default function Add(props) {
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
         <Alert onClose={handleClose} severity="success">
-          Posted successfully!
+          Posted successfully! Wait for image to be uploaded to ipfs.
         </Alert>
       </Snackbar>
     </>

@@ -10,6 +10,7 @@ contract Datreon {
     struct Image {
         uint256 id;
         string hash;
+        string title;
         string description;
         uint256 tipAmount;
         address payable author;
@@ -18,6 +19,7 @@ contract Datreon {
     event ImageCreated(
         uint256 id,
         string hash,
+        string title,
         string description,
         uint256 tipAmount,
         address payable author
@@ -25,17 +27,21 @@ contract Datreon {
     event ImageTipped(
         uint256 id,
         string hash,
+        string title,
         string description,
         uint256 tipAmount,
         address payable author
     );
 
     // create posts
-    function uploadImage(string memory _imgHash, string memory _description)
+    function uploadImage(string memory _imgHash, string memory _title, string memory _description)
         public
     {
         // Image should have an ipfs hash
         require(bytes(_imgHash).length > 0);
+
+        // Image should have a title
+        require(bytes(_title).length > 0);
 
         // Image should have a description
         require(bytes(_description).length > 0);
@@ -48,12 +54,13 @@ contract Datreon {
         images[imageCount] = Image(
             imageCount,
             _imgHash,
+            _title,
             _description,
             0,
             msg.sender
         );
 
-        emit ImageCreated(imageCount, _imgHash, _description, 0, msg.sender);
+        emit ImageCreated(imageCount, _imgHash, _title, _description, 0, msg.sender);
     }
 
     // tip posts
@@ -73,6 +80,7 @@ contract Datreon {
         emit ImageTipped(
             _id,
             _image.hash,
+            _image.title,
             _image.description,
             _image.tipAmount,
             _author

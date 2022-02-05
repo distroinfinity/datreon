@@ -104,7 +104,7 @@ export default function App() {
     };
   }
 
-  function uploadImage(description) {
+  function uploadImage(title, description) {
     console.log("Submitting file to ipfs...");
 
     //adding file to the IPFS
@@ -117,7 +117,7 @@ export default function App() {
 
       setLoading(true);
       datreon.methods
-        .uploadImage(result[0].hash, description)
+        .uploadImage(result[0].hash,title, description)
         .send({ from: account })
         .on("transactionHash", (hash) => {
           setLoading(false);

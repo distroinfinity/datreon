@@ -1,10 +1,13 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Identicon from "identicon.js";
 import Add from "./add";
 import MediaCard from "./postcard";
 import ArtistCard from "./artistCard";
+import SearchBar from "material-ui-search-bar";
 
 function Main(props) {
+  const [searchField, setSearchField] = useState("");
+
   return (
     <div className="container-fluid mt-5">
       {/* display: flex;
@@ -56,13 +59,35 @@ function Main(props) {
         > */}
         <div>
           <p>&nbsp;</p>
+          <SearchBar
+            placeholder="Find a creator you love"
+            value={searchField}
+            onChange={(newValue) => setSearchField(newValue)}
+            onRequestSearch={() => {
+              console.log(searchField);
+            }}
+          />
+          <p>&nbsp;</p>
+          {searchField.length==0? (<p>All creators</p>): ('')}
+          {/* <p>&nbsp;</p> */}
           {props.artists.map((artist, key) => {
-            return (
-              <>
-                <ArtistCard artist={artist} />
-                <p>&nbsp;</p>
-              </>
-            );
+            if (searchField != "") {
+              if ((artist == searchField)) {
+                return (
+                  <>
+                    <ArtistCard artist={artist} />
+                    <p>&nbsp;</p>
+                  </>
+                );
+              }
+            } else {
+              return (
+                <>
+                  <ArtistCard artist={artist} />
+                  <p>&nbsp;</p>
+                </>
+              );
+            }
           })}
         </div>
         {/* </main> */}
