@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -36,6 +36,23 @@ export default function ArtistCard(props) {
   const theme = useTheme();
   const [donation, setDonation] = useState(0);
 
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let count = 0;
+    // console.log(props.images);
+    for (var i = 0; i < props.images.length; i++) {
+      // console.log(i, images[i].author);
+      // if (images[i].author == author) {
+      //   id = images[i].id;
+      // }
+      if (props.images[i].author == props.artist) {
+        count++;
+      }
+    }
+    setCount(count);
+  }, []);
+
   return (
     <Card className={classes.root}>
       <div className={classes.details}>
@@ -43,9 +60,7 @@ export default function ArtistCard(props) {
           <Typography component="h6" variant="h6">
             {props.artist}
           </Typography>
-          {/* <Typography variant="subtitle1" color="textSecondary">
-            Support Button
-          </Typography> */}
+
           <div style={{ display: "flex" }}>
             <TextField
               id="outlined-basic"
@@ -66,6 +81,7 @@ export default function ArtistCard(props) {
                     return;
                   }
                   let tipAmount = window.web3.utils.toWei(donation, "Ether");
+                  // console.log("tip",tipAmount)
                   props.donateToAuthor(props.artist, tipAmount);
                 }}
               >
@@ -73,6 +89,14 @@ export default function ArtistCard(props) {
               </Button>
             </div>
           </div>
+          {/* <p>Test</p> */}
+          <Typography
+            variant="subtitle1"
+            color="textSecondary"
+            style={{ height: 0, paddingTop: "2px" }}
+          >
+            Total Publications: {count}
+          </Typography>
         </CardContent>
       </div>
       <CardMedia

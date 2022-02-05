@@ -128,12 +128,21 @@ export default function App() {
 
   function donateToAuthor(author, tipAmount) {
     let id;
-    for (let i = 0; i <= imageCount; i++) {
+    console.log("count", images.length);
+    // console.log("images", images);
+    for (var i = 0; i < images.length; i++) {
+      // console.log(i, images[i].author);
+      // if (images[i].author == author) {
+      //   id = images[i].id;
+      // }
       if (images[i].author == author) {
+        console.log(images[i].author, images[i].id);
         id = images[i].id;
         break;
       }
     }
+    console.log("id", id);
+    console.log("author", author);
 
     tipImageOwner(id, tipAmount);
   }

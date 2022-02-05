@@ -83,6 +83,7 @@ function Main(props) {
                   <>
                     <ArtistCard
                       artist={artist}
+                      images={props.images}
                       donateToAuthor={props.donateToAuthor}
                     />
                     <p>&nbsp;</p>
@@ -94,6 +95,7 @@ function Main(props) {
                 <>
                   <ArtistCard
                     artist={artist}
+                    images={props.images}
                     donateToAuthor={props.donateToAuthor}
                   />
                   <p>&nbsp;</p>
