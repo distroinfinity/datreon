@@ -55,6 +55,7 @@ export default function App() {
     // Network ID
     const networkId = await web3.eth.net.getId();
     console.log("network id", networkId);
+
     const networkData = Datreon.networks[networkId];
 
     if (networkData) {
@@ -139,6 +140,7 @@ export default function App() {
 
   function tipImageOwner(id, tipAmount) {
     // this.setState({ loading: true });
+    console.log(tipAmount);
     datreon.methods
       .tipImageOwner(id)
       .send({ from: account, value: tipAmount })

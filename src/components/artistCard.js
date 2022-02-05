@@ -49,7 +49,7 @@ export default function ArtistCard(props) {
           <div style={{ display: "flex" }}>
             <TextField
               id="outlined-basic"
-              label="Ether"
+              label="Matic"
               variant="outlined"
               size="small"
               value={donation}

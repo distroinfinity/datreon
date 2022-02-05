@@ -70,12 +70,12 @@ export default function MediaCard(props) {
             props.tipImageOwner(props.image.id, tipAmount);
           }}
         >
-          TIP 0.1 ETH
+          TIP 0.1 Matic
         </Button>
         <small className="float-left mt-1 text-muted">
           Total donations:{" "}
           {window.web3.utils.fromWei(props.image.tipAmount.toString(), "Ether")}{" "}
-          ETH
+          MATIC
         </small>
       </CardActions>
     </Card>
