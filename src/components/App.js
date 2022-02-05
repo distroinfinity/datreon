@@ -117,12 +117,24 @@ export default function App() {
 
       setLoading(true);
       datreon.methods
-        .uploadImage(result[0].hash,title, description)
+        .uploadImage(result[0].hash, title, description)
         .send({ from: account })
         .on("transactionHash", (hash) => {
           setLoading(false);
         });
     });
+  }
+
+  function donateToAuthor(author, tipAmount) {
+    let id;
+    for (let i = 0; i <= imageCount; i++) {
+      if (images[i].author == author) {
+        id = images[i].id;
+        break;
+      }
+    }
+
+    tipImageOwner(id, tipAmount);
   }
 
   function tipImageOwner(id, tipAmount) {
@@ -147,6 +159,7 @@ export default function App() {
           images={images}
           artists={artists}
           tipImageOwner={tipImageOwner}
+          donateToAuthor={donateToAuthor}
         />
       )}
     </div>

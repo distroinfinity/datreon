@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -12,6 +12,7 @@ import Identicon from "identicon.js";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ArtistCard(props) {
   const classes = useStyles();
   const theme = useTheme();
+  const [donation, setDonation] = useState(0);
 
   return (
     <Card className={classes.root}>
@@ -44,14 +46,33 @@ export default function ArtistCard(props) {
           {/* <Typography variant="subtitle1" color="textSecondary">
             Support Button
           </Typography> */}
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            endIcon={<MonetizationOnIcon />}
-          >
-            Support
-          </Button>
+          <div style={{ display: "flex" }}>
+            <TextField
+              id="outlined-basic"
+              label="Ether"
+              variant="outlined"
+              size="small"
+              value={donation}
+              onChange={(event) => setDonation(event.target.value)}
+            />
+            <div style={{ paddingLeft: "10px" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                endIcon={<MonetizationOnIcon />}
+                onClick={() => {
+                  if (donation == 0) {
+                    return;
+                  }
+                  let tipAmount = window.web3.utils.toWei(donation, "Ether");
+                  props.donateToAuthor(props.artist, tipAmount);
+                }}
+              >
+                Donate
+              </Button>
+            </div>
+          </div>
         </CardContent>
       </div>
       <CardMedia

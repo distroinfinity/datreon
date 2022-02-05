@@ -24,8 +24,8 @@ function Alert(props) {
 const useStyles = makeStyles((theme) => ({
   fab: {
     position: "fixed",
-    top: 100,
-    left: 30,
+    bottom: 50,
+    right: 50,
   },
   container: {
     width: 500,

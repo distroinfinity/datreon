@@ -4,6 +4,7 @@ import Add from "./add";
 import MediaCard from "./postcard";
 import ArtistCard from "./artistCard";
 import SearchBar from "material-ui-search-bar";
+import Typography from "@material-ui/core/Typography";
 
 function Main(props) {
   const [searchField, setSearchField] = useState("");
@@ -35,10 +36,11 @@ function Main(props) {
               uploadImage={props.uploadImage}
             />
 
-            <p>&nbsp;</p>
-
             {/* Code ... */}
-
+            <Typography variant="h2" gutterBottom>
+              Featured Artwork
+            </Typography>
+            {/* <p>&nbsp;</p> */}
             {props.images.map((image, key) => {
               return (
                 <>
@@ -57,7 +59,7 @@ function Main(props) {
           className="col-lg-12 ml-auto mr-auto"
           style={{ maxWidth: "300px" }}
         > */}
-        <div>
+        <div style={{ paddingRight: "100px" }}>
           <p>&nbsp;</p>
           <SearchBar
             placeholder="Find a creator you love"
@@ -68,14 +70,21 @@ function Main(props) {
             }}
           />
           <p>&nbsp;</p>
-          {searchField.length==0? (<p>All creators</p>): ('')}
+          {searchField.length == 0 ? (
+            <p>Support your favourite creators</p>
+          ) : (
+            ""
+          )}
           {/* <p>&nbsp;</p> */}
           {props.artists.map((artist, key) => {
             if (searchField != "") {
-              if ((artist == searchField)) {
+              if (artist == searchField) {
                 return (
                   <>
-                    <ArtistCard artist={artist} />
+                    <ArtistCard
+                      artist={artist}
+                      donateToAuthor={props.donateToAuthor}
+                    />
                     <p>&nbsp;</p>
                   </>
                 );
@@ -83,7 +92,10 @@ function Main(props) {
             } else {
               return (
                 <>
-                  <ArtistCard artist={artist} />
+                  <ArtistCard
+                    artist={artist}
+                    donateToAuthor={props.donateToAuthor}
+                  />
                   <p>&nbsp;</p>
                 </>
               );

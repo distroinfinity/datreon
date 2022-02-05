@@ -46,14 +46,20 @@ export default function MediaCard(props) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-          {props.image.title}
+            {props.image.title}
           </Typography>
           <Typography variant="body2" component="p">
             {props.image.description}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions style={{ display: "flex", alignItems: "baseline", justifyContent:"space-between"}}>
+      <CardActions
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+        }}
+      >
         <Button
           size="small"
           color="primary"
